@@ -690,22 +690,22 @@ Sobald ruff nun wieder ohne Fehler läuft, die Änderungen zum remote pushen. Ei
 
 Das Praktikum ist abgeschlossen, wenn:
 
-- [ ] ihr einen eigenen Fork erstellt und mit VS Code geklont habt,
-- [ ] ihr auf einem Feature-Branch gearbeitet habt,
-- [ ] `uv run pytest` lokal erfolgreich ist,
-- [ ] ihr zunächst bewusst eine **rote Ruff-CI** gesehen habt,
-- [ ] ihr den CI-Fehler im GitHub-Actions-Log gelesen habt,
-- [ ] ihr dieselben Ruff-Checks lokal reproduziert habt,
-- [ ] `ruff check --fix` und `ruff format` lokal verwendet wurden,
-- [ ] ihr die Änderungen anschließend über Git-Diffs kontrolliert habt,
-- [ ] schlecht verständliche Variablennamen zusätzlich manuell verbessert wurden,
-- [ ] `uv run ruff check .` lokal grün ist,
-- [ ] `uv run ruff format --check .` lokal grün ist,
-- [ ] pytest Teil der CI ist,
-- [ ] die CI auf Python 3.12 und 3.13 läuft,
-- [ ] "E" zu den ruff-Settings in der pyproject.toml hinzugefügt ist,
-- [ ] alle Matrix-Jobs grün sind,
-- [ ] der Pull Request erst danach gemerged wurde.
+- [x] ihr einen eigenen Fork erstellt und mit VS Code geklont habt,
+- [x] ihr auf einem Feature-Branch gearbeitet habt,
+- [x] `uv run pytest` lokal erfolgreich ist,
+- [x] ihr zunächst bewusst eine **rote Ruff-CI** gesehen habt,
+- [x] ihr den CI-Fehler im GitHub-Actions-Log gelesen habt,
+- [x] ihr dieselben Ruff-Checks lokal reproduziert habt,
+- [x] `ruff check --fix` und `ruff format` lokal verwendet wurden,
+- [x] ihr die Änderungen anschließend über Git-Diffs kontrolliert habt,
+- [x] schlecht verständliche Variablennamen zusätzlich manuell verbessert wurden,
+- [x] `uv run ruff check .` lokal grün ist,
+- [x] `uv run ruff format --check .` lokal grün ist,
+- [x] pytest Teil der CI ist,
+- [x] die CI auf Python 3.12 und 3.13 läuft,
+- [x] "E" zu den ruff-Settings in der pyproject.toml hinzugefügt ist,
+- [x] alle Matrix-Jobs grün sind,
+- [x] der Pull Request erst danach gemerged wurde.
 
 ---
 
@@ -714,13 +714,25 @@ Das Praktikum ist abgeschlossen, wenn:
 Besprecht zum Schluss kurz:
 
 1. Was ist der Unterschied zwischen `ruff check --fix .` und `ruff check .`?
+  -> 'ruff check' ueberprueft lediglich den Code, waehrend 'ruff check --fix' gleich jene (sicheren) Fehler korrigiert
 2. Warum verwendet CI `ruff format --check .` und nicht `ruff format .`?
+  -> 'ruff format --check .' ueberprueft die Formatierung; 'ruff format .' wuerde gleich den file umformatieren
 3. Was kann Ruff automatisch verbessern – und was nicht?
+  -> klar erkannte (Schoenheits-)Fehler welche nicht die Laufeigenschaften des Codes aendern koennen direkt korrigiert werden
+  -> bei unklaren Fehlern und jenen die eventuell die Eigenschaften des Codes veraendern koennen verbessert Ruff nicht automatisch
 4. Warum führen wir nach automatischen Ruff-Fixes erneut pytest aus?
+  -> um zu ueberpruefen ob unsere gewuenschten Codeeigenschaften nach wie vor erhalten geblieben sind
 5. Was ist der Unterschied zwischen einem lokalen Testlauf und CI?
+  -> bei CI werden Testlaeufe automatisch in den workflow integriert (bspw. bei jedem commit oder push);
+  es wird also immer die aktuellste Version des Codes getestet
 6. Was bedeutet ein grüner CI-Workflow **nicht**?
+  -> das ein Merge problemlos funktioniert
+  -> das der Code so funktioniert wie gewuenscht (kontrolliert nur linting, formatting und eigene uni-tests)
 7. Welche zusätzliche Aussage überprüft eine Python-Versionen-Matrix?
+  -> eine Python-Versionen-Matrix ueberprueft ob unser Code kompartible ist mit unterschiedlichen Python-Versionen
 8. Warum ist `uv.lock` für einen reproduzierbaren CI-Lauf hilfreich?
+  -> 'uv.lock' dokumentiert alle verwendeten Versionen und dependencies verwendet in dem Environment unseres Projects;
+  CI-Lauefe und Tests laufen immer im Kontext dieser Dependencies, sollte etwas nicht laufen koennte dies der Grund sein
 
 ---
 
